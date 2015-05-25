@@ -48,15 +48,14 @@ def calculateFeatures( imagePath ):
 	brightMatrix = numpy.where( img_gray > img_gray.mean() )
 
 	featureVector = numpy.array([imageEntropy.mean(), imageEntropy.max(), img_gray.mean(), hueMatrix.mean(), hueMatrix.size - numpy.count_nonzero(hueCount), float(numpy.count_nonzero(brightMatrix)) / img_gray.size])
-	print ("Mean entropy: "+repr(featureVector[0]))
-	print ("Max entropy: "+repr(featureVector[1]))
-	print ("Mean intensity: "+repr(featureVector[2]))
-	print ("Mean hue: "+repr(featureVector[3]))
-	print ("Count of average hue pixels: "+repr(featureVector[4]))
-	print ("Percentage of light pixels: "+repr(featureVector[5]))
 
-	plt.show()
+	#print ("Mean entropy: "+repr(featureVector[0]))
+	#print ("Max entropy: "+repr(featureVector[1]))
+	#print ("Mean intensity: "+repr(featureVector[2]))
+	#print ("Mean hue: "+repr(featureVector[3]))
+	#print ("Count of average hue pixels: "+repr(featureVector[4]))
+	#print ("Percentage of light pixels: "+repr(featureVector[5]))
+
+	#plt.show()
 
 	return featureVector
-
-calculateFeatures("picasso123.JPG")

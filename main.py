@@ -1,6 +1,6 @@
 import os
 import numpy as numpy
-import features.py
+from features import calculateFeatures
 
 ## Creating array of labels and directories to calculate features
 painters = []
@@ -15,8 +15,13 @@ for folder in os.listdir(directory):
 				paintings.append(os.path.join(folderRoute, fileName))
 
 paintersArray = numpy.array([painters])
+paintingFeatures = None
 
 for painting in paintings:
-	pass
-
+	features = calculateFeatures(painting)
+	if paintingFeatures == None:
+		paintingFeatures = features
+	else:
+		paintingFeatures = numpy.vstack((paintingFeatures, features))
+print(paintingFeatures)
 
