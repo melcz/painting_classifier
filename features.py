@@ -21,18 +21,18 @@ def calculateFeatures( imagePath ):
 	img_gray = color.rgb2gray(image)
 	img_hsv = color.rgb2hsv(image)
 
-	fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 4))
+	#fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 4))
 
-	img0 = ax0.imshow(img_gray, cmap=plt.cm.gray)
-	ax0.set_title('Image')
-	ax0.axis('off')
-	fig.colorbar(img0, ax=ax0)
+	#img0 = ax0.imshow(img_gray, cmap=plt.cm.gray)
+	#ax0.set_title('Image')
+	#ax0.axis('off')
+	#fig.colorbar(img0, ax=ax0)
 
 	imageEntropy = entropy(img_gray, disk(5))
-	img1 = ax1.imshow(imageEntropy, cmap=plt.cm.jet)
-	ax1.set_title('Entropy')
-	ax1.axis('off')
-	fig.colorbar(img1, ax=ax1)
+	#img1 = ax1.imshow(imageEntropy, cmap=plt.cm.jet)
+	#ax1.set_title('Entropy')
+	#ax1.axis('off')
+	#fig.colorbar(img1, ax=ax1)
 
 	huePreMatrix = []
 	for row in img_hsv:

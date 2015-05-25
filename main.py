@@ -1,6 +1,20 @@
 import os
 import numpy as numpy
 from features import calculateFeatures
+from classifier import calculateCluster
+from sklearn.datasets import load_digits
+from sklearn.preprocessing import scale
+
+def fillFeaturesMatrix (paintings):
+	paintingFeatures = None
+
+	for painting in paintings:
+		features = calculateFeatures(painting)
+		if paintingFeatures == None:
+			paintingFeatures = features
+		else:
+			paintingFeatures = numpy.vstack((paintingFeatures, features))
+	return paintingFeatures
 
 ## Creating array of labels and directories to calculate features
 painters = []
@@ -15,13 +29,8 @@ for folder in os.listdir(directory):
 				paintings.append(os.path.join(folderRoute, fileName))
 
 paintersArray = numpy.array([painters])
-paintingFeatures = None
+#featuresMatrix = fillFeaturesMatrix(paintings)
 
-for painting in paintings:
-	features = calculateFeatures(painting)
-	if paintingFeatures == None:
-		paintingFeatures = features
-	else:
-		paintingFeatures = numpy.vstack((paintingFeatures, features))
-print(paintingFeatures)
-
+digits = load_digits()
+data = scale(digits.data)
+#calculateCluster (data, digits)
