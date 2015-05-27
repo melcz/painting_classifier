@@ -3,7 +3,6 @@ print(__doc__)
 from time import time
 import numpy as np
 import matplotlib.pyplot as plt
-
 from sklearn import metrics
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -14,12 +13,8 @@ def calculateCluster( data, labels ):
 	data = data
 
 	n_samples, n_features = data.shape
-	n_digits = len(np.unique(digits.target))
-	labels = digits.target
-	print(data)
-	print(labels)
-
-	sample_size = 300
+	n_digits = len(np.unique(digits))
+	labels = digits
 
 	print("n_digits: %d, \t n_samples %d, \t n_features %d"
 	      % (n_digits, n_samples, n_features))
