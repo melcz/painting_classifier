@@ -7,10 +7,10 @@ from sklearn.preprocessing import scale
 import sys
 
 def fillFeaturesMatrix (paintings):
-	paintingFeatures = None
+	paintingFeatures = numpy.array([])
 	for painting in paintings:
 		features = calculateFeatures(painting)
-		if paintingFeatures == None:
+		if paintingFeatures.size == 0:
 			paintingFeatures = features
 		else:
 			paintingFeatures = numpy.vstack((paintingFeatures, features))

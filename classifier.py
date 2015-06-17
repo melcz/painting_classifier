@@ -1,5 +1,3 @@
-print(__doc__)
-
 from time import time
 import numpy as np
 import matplotlib.pyplot as plt
@@ -18,10 +16,6 @@ def calculateCluster( data, labels ):
 
 	print("n_digits: %d, \t n_samples %d, \t n_features %d"
 	      % (n_digits, n_samples, n_features))
-
-	# in this case the seeding of the centers is deterministic, hence we run the
-	# kmeans algorithm only once with n_init=1
-	pca = PCA(n_components=n_digits).fit(data)
 
 	###############################################################################
 	# Visualize the results on PCA-reduced data
@@ -56,7 +50,7 @@ def calculateCluster( data, labels ):
 	plt.scatter(centroids[:, 0], centroids[:, 1],
 	            marker='x', s=169, linewidths=3,
 	            color='w', zorder=10)
-	plt.title('K-means clustering on the digits dataset (PCA-reduced data)\n'
+	plt.title('K-means clustering on paintings (PCA-reduced data)\n'
 	          'Centroids are marked with white cross')
 	plt.xlim(x_min, x_max)
 	plt.ylim(y_min, y_max)
