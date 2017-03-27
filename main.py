@@ -75,6 +75,10 @@ for i in range(0, populationSize):
 		if population[i][j] ==  0:
 			individual = numpy.delete(individual, j, 1)
 	kmeans = calculateCluster (individual, labels, False)
+	vmeasure = metrics.v_measure_score(labels[0], kmeans.labels_)
+	silhouette = metrics.silhouette_score(data, kmeans.labels_, metric='euclidean',sample_size=len(data))
+	results.append(vmeasure+silhouette)
+	print(results)
 
 # kmeans = calculateCluster (data, labels, False)
 
