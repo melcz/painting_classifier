@@ -1,38 +1,20 @@
-"""
-=======
-Entropy
-=======
+# -*- coding: utf-8 -*-
 
-Image entropy is a quantity which is used to describe the amount of information
-coded in an image.
-
-"""
 import matplotlib.pyplot as plt
 import numpy as numpy
-
-from skimage import data, color
-from skimage.filters.rank import entropy
+import skimage as skimage
 from skimage.morphology import disk
 from skimage.util import img_as_ubyte
+from skimage.feature import blob_dog
 from skimage.io import imread
+from fractal import fractal_dimension
 
 def calculateFeatures( imagePath ):
 	image = img_as_ubyte(imread(imagePath, as_grey=False, plugin=None, flatten=None))
-	img_gray = color.rgb2gray(image)
-	img_hsv = color.rgb2hsv(image)
+	img_gray = skimage.color.rgb2gray(image)
+	img_hsv = skimage.color.rgb2hsv(image)
 
-	#fig, (ax0, ax1) = plt.subplots(ncols=2, figsize=(10, 4))
-
-	#img0 = ax0.imshow(img_gray, cmap=plt.cm.gray)
-	#ax0.set_title('Image')
-	#ax0.axis('off')
-	#fig.colorbar(img0, ax=ax0)
-
-	imageEntropy = entropy(img_gray, disk(5))
-	#img1 = ax1.imshow(imageEntropy, cmap=plt.cm.jet)
-	#ax1.set_title('Entropy')
-	#ax1.axis('off')
-	#fig.colorbar(img1, ax=ax1)
+	imageEntropy = skimage.filters.rank.entropy(img_gray, disk(5))
 
 	huePreMatrix = []
 	for row in img_hsv:
@@ -54,8 +36,11 @@ def calculateFeatures( imagePath ):
 	countOfAverageHuePixels = hueMatrix.size - numpy.count_nonzero(hueCount)
 	percentageOfLightPixels = float(numpy.count_nonzero(brightMatrix)) / img_gray.size
 
-	featureVector = numpy.array([meanEntropy, maxEntropy, meanIntensity, meanHue, countOfAverageHuePixels, percentageOfLightPixels])
+	mbFractalDimension = fractal_dimension(img_gray)
+	hFractalDimension = (numpy.log(3)/numpy.log(2))
 
-	#plt.show()
+	blobCount = len(blob_dog(img_gray))
+
+	featureVector = numpy.array([meanEntropy, maxEntropy, meanIntensity, meanHue, countOfAverageHuePixels, percentageOfLightPixels, mbFractalDimension, hFractalDimension, blobCount])
 
 	return featureVector

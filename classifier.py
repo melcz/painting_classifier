@@ -5,16 +5,11 @@ from sklearn import metrics
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
-def calculateCluster( data, labels ):
-
-	digits = labels
-	data = data
-
+def calculateCluster( data, labels, graphic ):
 	n_samples, n_features = data.shape
-	n_digits = len(np.unique(digits))
-	labels = digits
+	n_digits = len(np.unique(labels))
 
-	print("n_digits: %d, \t n_samples %d, \t n_features %d"
+	print("n_labels: %d, \t n_samples %d, \t n_features %d"
 	      % (n_digits, n_samples, n_features))
 
 	###############################################################################
@@ -37,6 +32,7 @@ def calculateCluster( data, labels ):
 
 	# Put the result into a color plot
 	Z = Z.reshape(xx.shape)
+
 	plt.figure(1)
 	plt.clf()
 	plt.imshow(Z, interpolation='nearest',
@@ -56,4 +52,6 @@ def calculateCluster( data, labels ):
 	plt.ylim(y_min, y_max)
 	plt.xticks(())
 	plt.yticks(())
-	plt.show()
+	if graphic:
+		plt.show()
+	return kmeans

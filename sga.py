@@ -1,0 +1,3 @@
+
+def fitnessFunction(prediction, labels):
+    
