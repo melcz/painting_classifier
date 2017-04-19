@@ -4,17 +4,18 @@ import matplotlib.pyplot as plt
 from sklearn import metrics
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
+from sklearn import preprocessing
 
 def calculateCluster( data, labels, graphic ):
 	n_samples, n_features = data.shape
 	n_digits = len(np.unique(labels))
 
-	print("n_labels: %d, \t n_samples %d, \t n_features %d"
-	      % (n_digits, n_samples, n_features))
-
+	if graphic:
+		print("n_labels: %d, \t n_samples %d, \t n_features %d")
 	###############################################################################
 	# Visualize the results on PCA-reduced data
 
+	scaledData = preprocessing.scale(data)
 	reduced_data = PCA(n_components=2).fit_transform(data)
 	kmeans = KMeans(init='k-means++', n_clusters=n_digits, n_init=10)
 	kmeans.fit(reduced_data)
