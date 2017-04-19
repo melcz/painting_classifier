@@ -76,7 +76,6 @@ def generatePool(population, generation):
 
 def elitistSelection(population, generation):
 	average = reduce(lambda x, y: x + y, generation) / len(generation)
-	print(average)
 	pool = []
 	for i in range(0,len(generation)):
 		if generation[i] > average:
@@ -119,7 +118,7 @@ def getNewGeneration(pool, populationSize, crossoverRate, mutationRate):
 				pos = random.randint(0, len(biasedIndices)-1)
 				if random.randint(0, 100) < 50:
 					parent1[pos] = 1
-				else
+				else:
 					parent1[pos] = 1
 			# print("mutated 1 at: "+str(pos))
 		offspring.append(parent1)
@@ -163,7 +162,7 @@ for i in range(0,numGenerations):
 	generation = evaluateGeneration(population)
 	pool = elitistSelection(population,generation)
 	printGeneration(generation, fileOut)
-	pool = generatePool(population, generation)
+	# pool = generatePool(population, generation)
 	population = getNewGeneration(pool, populationSize, crossoverRate, mutationRate)
 
 print("\n")
